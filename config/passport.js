@@ -1,5 +1,5 @@
 const passport = require("passport");
-const { findUserByUsername } = require("../models/usersModel");
+const { findUserByUsername, findUserById } = require("../models/usersModel");
 const { validatePassword } = require("../lib/passwordUtils");
 const LocalStrategy = require("passport-local").Strategy;
 
@@ -7,7 +7,7 @@ const verifyCallback = async (username, password, done) => {
   try {
     const user = await findUserByUsername(username);
     if (!user) {
-      return done(null, false);
+      return done(null, false, { message: "Invalid username or password" });
     }
 
     const isValid = validatePassword(password, user.password_hash);
@@ -24,3 +24,19 @@ const verifyCallback = async (username, password, done) => {
 const strategy = new LocalStrategy(verifyCallback);
 
 passport.use(strategy);
+
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser(async (userId, done) => {
+  try {
+    const user = await findUserById(userId);
+    if (!user) {
+      return done(null, false);
+    }
+    done(null, user);
+  } catch (err) {
+    done(err);
+  }
+});
