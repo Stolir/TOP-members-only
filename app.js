@@ -13,6 +13,9 @@ const pgSession = require("connect-pg-simple")(expressSession);
 const pool = require("./database/pool");
 
 // Require Routes
+const indexRouter = require("./routes/indexRouter");
+const loginRouter = require("./routes/loginRouter");
+const signupRouter = require("./routes/signupRouter");
 
 // Define express related
 const app = express();
@@ -47,11 +50,14 @@ app.use((req, res, next) => {
 });
 
 // use routes
+app.use("/", indexRouter);
+app.use("/login", loginRouter);
+app.use("/signup", signupRouter);
 
 // Run app
 app.listen(PORT, (err) => {
   if (err) {
     throw err;
   }
-  console.log(`App running on ${PORT}`);
+  console.log(`App running on port ${PORT}`);
 });
