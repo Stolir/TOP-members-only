@@ -17,7 +17,12 @@ const validateUserLogin = [
 ];
 
 function getLoginPage(req, res) {
-  res.render("login", { title: "Login" });
+  const data = {};
+  if (req.session.username) {
+    data.username = req.session.username;
+    delete req.session.username;
+  }
+  res.render("login", { title: "Login", data });
 }
 
 module.exports = { getLoginPage };

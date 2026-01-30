@@ -1,5 +1,6 @@
-const { body } = require("express-validator");
-const { findUserByUsername } = require("../models/usersModel");
+const { body, validationResult, matchedData } = require("express-validator");
+const { findUserByUsername, createUser } = require("../models/usersModel");
+const { generateHashedPassword } = require("../lib/passwordUtils");
 
 const validateUser = [
   body("first_name")
@@ -53,7 +54,33 @@ const validateUser = [
 ];
 
 function getSignupPage(req, res) {
-  res.render("signup", { title: "Sign Up" });
+  res.render("signup", { title: "Sign Up", data: {}, errors: {} });
 }
 
-module.exports = { getSignupPage };
+const postSignupRequest = [
+  validateUser,
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      const errorsMap = {};
+      errors.array().forEach((error) => (errorsMap[error.path] = error.msg));
+      return res.status(422).render("signup", {
+        title: "Sign Up",
+        errors: errorsMap,
+        data: req.body,
+      });
+    }
+    const data = matchedData(req);
+    const password_hash = generateHashedPassword(data.password);
+    const username = await createUser([
+      data.first_name,
+      data.last_name ?? null,
+      data.username,
+      password_hash,
+    ]);
+    req.session.username = username;
+    res.redirect("/login");
+  },
+];
+
+module.exports = { getSignupPage, postSignupRequest };

@@ -10,12 +10,18 @@
     <form action="/login" method="post">
       <div>
         <label for="username">Username</label>
-        <input type="text" id="username" name="username" required />
+        <input
+          type="text"
+          id="username"
+          name="username"
+          value="<%= data?.username || '' %>"
+          required
+        />
       </div>
       <div>
         <label for="password">Password</label>
         <input
-          type="text"
+          type="password"
           id="password"
           name="password
         "

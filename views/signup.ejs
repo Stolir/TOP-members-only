@@ -3,35 +3,52 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/global.css">
     <title><%= title %></title>
   </head>
   <body>
+
     <h1><%= title %></h1>
     <form action="/signup" method="post">
       <div>
         <label for="firstName">First Name</label>
-        <input type="text" id="firstName" name="first_name" required />
+        <input type="text" id="firstName" name="first_name" value="<%= data?.first_name || '' %>" required />
+        <% if (errors?.first_name) { %>
+          <span class="error"><%= errors.first_name %></span>
+        <% } %>
       </div>
       <div>
         <label for="lastName">Last Name</label>
-        <input type="text" id="lastName" name="last_name" />
+        <input type="text" id="lastName" name="last_name" value="<%= data?.last_name || '' %>" />
+        <% if (errors?.last_name) { %>
+          <span class="error"><%= errors.last_name %></span>
+        <% } %>
       </div>
       <div>
         <label for="username">Username</label>
-        <input type="text" id="username" name="username" required />
+        <input type="text" id="username" name="username" value="<%= data?.username || '' %>" required />
+        <% if (errors?.username) { %>
+          <span class="error"><%= errors.username %></span>
+        <% } %>
       </div>
       <div>
         <label for="password">Password</label>
-        <input type="text" id="password" name="password" required />
+        <input type="password" id="password" name="password" required />
+        <% if (errors?.password) { %>
+          <span class="error"><%= errors.password %></span>
+        <% } %>
       </div>
       <div>
         <label for="confirmPassword">Confirm Password</label>
         <input
-          type="text"
+          type="password"
           id="confirmPassword"
           name="confirmPassword"
           required
         />
+        <% if (errors?.confirmPassword) { %>
+          <span class="error"><%= errors.confirmPassword %></span>
+        <% } %>
       </div>
       <button type="submit">Sign Up</button>
     </form>
