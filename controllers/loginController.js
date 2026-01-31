@@ -18,11 +18,18 @@ const validateUserLogin = [
 
 function getLoginPage(req, res) {
   const data = {};
+  const errors = req.session.messages ?? [];
+  delete req.session.messages;
+
   if (req.session.username) {
     data.username = req.session.username;
     delete req.session.username;
   }
-  res.render("login", { title: "Login", data });
+  res.render("login", { title: "Login", data, errors });
 }
 
-module.exports = { getLoginPage };
+function postLoginSuccess(req, res) {
+  res.send("<h1>You are logged in!</h1>");
+}
+
+module.exports = { getLoginPage, postLoginSuccess };

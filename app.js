@@ -2,6 +2,8 @@ require("dotenv").config({
   path: `.env.${process.env.NODE_ENV || "development"}`,
 });
 
+require("./config/passport");
+
 // Require express related
 const express = require("express");
 const path = require("node:path");
@@ -16,6 +18,7 @@ const pool = require("./database/pool");
 const indexRouter = require("./routes/indexRouter");
 const loginRouter = require("./routes/loginRouter");
 const signupRouter = require("./routes/signupRouter");
+const logoutRouter = require("./routes/logoutRouter");
 
 // Define express related
 const app = express();
@@ -53,6 +56,7 @@ app.use((req, res, next) => {
 app.use("/", indexRouter);
 app.use("/login", loginRouter);
 app.use("/signup", signupRouter);
+app.use("/logout", logoutRouter);
 
 // Run app
 app.listen(PORT, (err) => {

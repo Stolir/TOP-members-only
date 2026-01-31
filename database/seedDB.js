@@ -29,6 +29,14 @@ async function run() {
         body TEXT NOT NULL,
         created_at TIMESTAMPTZ NOT NULL DEFAULT now()
       );
+
+      CREATE TABLE IF NOT EXISTS account_status_passwords (
+      id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+      role_name TEXT NOT NULL UNIQUE,
+      password_hash TEXT NOT NULL,
+      created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+      created_by INTEGER REFERENCES users(id) ON DELETE SET NULL
+      )
       `,
     );
 

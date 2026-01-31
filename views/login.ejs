@@ -3,11 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/global.css">
     <title><%= title %></title>
   </head>
   <body>
     <h1><%= title %></h1>
     <form action="/login" method="post">
+      <div class="errors">
+        <% errors.forEach(error => { %>
+         <p><%= error %></p>
+        <% }) %>
+      </div>
       <div>
         <label for="username">Username</label>
         <input
@@ -23,8 +29,7 @@
         <input
           type="password"
           id="password"
-          name="password
-        "
+          name="password"
           required
         />
       </div>
