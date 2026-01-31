@@ -1,5 +1,5 @@
 const { body, validationResult, matchedData } = require("express-validator");
-const { isAdminUser } = require("../lib/authHelpers");
+const { userIsAdmin } = require("../lib/authHelpers");
 const { validatePassword } = require("../lib/passwordUtils");
 const { findHashByRoleName } = require("../models/accountStatusPasswordsModel");
 const { setUserRole, setUserAdminStatus } = require("../models/usersModel");
@@ -13,7 +13,7 @@ function getUpgradeAccountPage(req, res) {
 }
 
 function getUpgradeToAdminPage(req, res, next) {
-  if (isAdminUser(req)) {
+  if (userIsAdmin(req)) {
     return res.send(
       '<h1>You are already an admin</h1> <p><a href="/admin/dashboard">Go to dashboard</a></p>',
     );

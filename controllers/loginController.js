@@ -1,4 +1,5 @@
 const { body } = require("express-validator");
+const { userIsLoggedIn } = require("../lib/authHelpers");
 
 const validateUserLogin = [
   body("username")
@@ -17,6 +18,12 @@ const validateUserLogin = [
 ];
 
 function getLoginPage(req, res) {
+  if (userIsLoggedIn) {
+    return res.send(
+      '<h1>You are already logged in</h1> <a href="/">Return to home</a> ',
+    );
+  }
+
   const data = {};
   const errors = req.session.messages ?? [];
   delete req.session.messages;
