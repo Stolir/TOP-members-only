@@ -19,6 +19,8 @@ const indexRouter = require("./routes/indexRouter");
 const loginRouter = require("./routes/loginRouter");
 const signupRouter = require("./routes/signupRouter");
 const logoutRouter = require("./routes/logoutRouter");
+const upgradeAccountRouter = require("./routes/upgradeAccountRouter");
+const adminRouter = require("./routes/adminRouter");
 
 // Define express related
 const app = express();
@@ -48,7 +50,7 @@ app.use(passport.session());
 // Debugging -- DEV ONLY --
 app.use((req, res, next) => {
   console.log(req.session);
-  console.log(req.user);
+  // console.log(req.user);
   next();
 });
 
@@ -57,6 +59,8 @@ app.use("/", indexRouter);
 app.use("/login", loginRouter);
 app.use("/signup", signupRouter);
 app.use("/logout", logoutRouter);
+app.use("/upgrade-account", upgradeAccountRouter);
+app.use("/admin", adminRouter);
 
 // Run app
 app.listen(PORT, (err) => {

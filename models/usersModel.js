@@ -43,8 +43,22 @@ async function createUser(data) {
   }
 }
 
+async function setUserAdminStatus(userId, value) {
+  const query = `
+  UPDATE users SET is_admin = $2 WHERE id = $1
+  `;
+
+  try {
+    await pool.query(query, [userId, value]);
+  } catch (err) {
+    console.error(`Error setting user number ${userId} to Admin: `, err);
+    throw err;
+  }
+}
+
 module.exports = {
   findUserByUsername,
   findUserById,
   createUser,
+  setUserAdminStatus,
 };
