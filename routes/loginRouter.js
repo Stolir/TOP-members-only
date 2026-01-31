@@ -2,6 +2,7 @@ const { Router } = require("express");
 const {
   getLoginPage,
   postLoginSuccess,
+  postValidateLogin,
 } = require("../controllers/loginController");
 const passport = require("passport");
 
@@ -10,6 +11,7 @@ const loginRouter = Router();
 loginRouter.get("/", getLoginPage);
 loginRouter.post(
   "/",
+  postValidateLogin,
   (req, res, next) => {
     req.redirectTo = req.session.redirectUrl ?? null;
     delete req.session.redirect;

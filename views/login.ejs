@@ -23,6 +23,9 @@
           value="<%= data?.username || '' %>"
           required
         />
+        <% if (validationErrors?.username) { %>
+          <span class="error"><%= validationErrors.username %></span>
+        <% } %>
       </div>
       <div>
         <label for="password">Password</label>
@@ -32,6 +35,9 @@
           name="password"
           required
         />
+        <% if (validationErrors?.password) { %>
+          <span class="error"><%= validationErrors.password %></span>
+        <% } %>
       </div>
       <button type="submit">Log In</button>
     </form>

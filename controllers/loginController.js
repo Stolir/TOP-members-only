@@ -1,4 +1,4 @@
-const { body } = require("express-validator");
+const { body, validationResult } = require("express-validator");
 const { userIsLoggedIn } = require("../lib/authHelpers");
 
 const validateUserLogin = [
@@ -32,16 +32,43 @@ function getLoginPage(req, res) {
     data.username = req.session.username;
     delete req.session.username;
   }
-  res.render("login", { title: "Login", data, errors });
+  res.render("login", { title: "Login", data, errors, validationErrors: {} });
 }
+
+const postValidateLogin = [
+  validateUserLogin,
+  (req, res, next) => {
+    const validationErrors = validationResult(req);
+    if (!validationErrors.isEmpty()) {
+      // define passport auth errors
+      const errors = req.session.messages ?? [];
+      delete req.session.messages;
+
+      // define validation errors
+      const errorsMap = {};
+      validationErrors
+        .array()
+        .forEach((error) => (errorsMap[error.path] = error.msg));
+      console.log(errors);
+      console.log(validationErrors);
+      console.log(errorsMap);
+      return res.status(422).render("login", {
+        title: "Login",
+        data: req.body,
+        errors,
+        validationErrors: errorsMap,
+      });
+    }
+    return next();
+  },
+];
 
 function postLoginSuccess(req, res) {
   if (req.redirectTo) {
-    console.log(req.redirectTo);
     res.redirect(req.redirectTo);
   } else {
     res.send("<h1>You are logged in!</h1>");
   }
 }
 
-module.exports = { getLoginPage, postLoginSuccess };
+module.exports = { getLoginPage, postValidateLogin, postLoginSuccess };
