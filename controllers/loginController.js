@@ -18,7 +18,7 @@ const validateUserLogin = [
 ];
 
 function getLoginPage(req, res) {
-  if (userIsLoggedIn) {
+  if (userIsLoggedIn(req)) {
     return res.send(
       '<h1>You are already logged in</h1> <a href="/">Return to home</a> ',
     );
