@@ -29,7 +29,12 @@ function getLoginPage(req, res) {
 }
 
 function postLoginSuccess(req, res) {
-  res.send("<h1>You are logged in!</h1>");
+  if (req.redirectTo) {
+    console.log(req.redirectTo);
+    res.redirect(req.redirectTo);
+  } else {
+    res.send("<h1>You are logged in!</h1>");
+  }
 }
 
 module.exports = { getLoginPage, postLoginSuccess };
