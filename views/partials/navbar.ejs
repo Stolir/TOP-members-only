@@ -2,7 +2,7 @@
   <nav>
     <a href="/"><img class="logo" src="/images/logo.png" alt="Stolaris Forum Logo"></a>
     <ul>
-      <% if (isLoggedIn) { %>
+      <% if (user) { %>
         <li><a href="/messages/new"><img src="/icons/plus-circle.svg" alt="create new post"></a></li>
         <li><a href="/account/manage"><img src="/icons/profile-circle.svg" alt="Manage Account"></a></li>
         <li><a href="/logout"><img src="/icons/log-out.svg" alt="log out"></a></li>
