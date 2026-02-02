@@ -3,9 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/global.css" />
     <title><%= title %></title>
   </head>
   <body>
+    <%- include('partials/navbar') %>
     <h1><%= title %></h1>
     <p><a href="/admin/set-admin-password">Set Admin password</a></p>
     <p><a href="/admin/set-club-password">Set Club password</a></p>

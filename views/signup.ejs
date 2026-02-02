@@ -7,8 +7,9 @@
     <title><%= title %></title>
   </head>
   <body>
-
+    <%- include('partials/navbar') %>
     <h1><%= title %></h1>
+    
     <form action="/signup" method="post">
       <div>
         <label for="firstName">First Name</label>

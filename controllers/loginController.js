@@ -64,7 +64,7 @@ function postLoginSuccess(req, res) {
   if (req.redirectTo) {
     res.redirect(req.redirectTo);
   } else {
-    res.send("<h1>You are logged in!</h1>");
+    res.redirect("/");
   }
 }
 

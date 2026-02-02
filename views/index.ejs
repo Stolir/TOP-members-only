@@ -3,15 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/global.css">
     <title><%= title %></title>
   </head>
   <body>
     <%- include('partials/navbar') %>
     <h1><%= title %></h1>
-    <section>
+    <section class="posts-container">
     <% if (messages.length > 0) { 
       messages.forEach(message => { %>
-        <div>
+        <div class="posts-container__card">
         <p><%= message.title %></p>
         <p><%= message.body %></p>
         <p style="color: grey;"><%= message.username ?? 'Anonymous' %></p>
