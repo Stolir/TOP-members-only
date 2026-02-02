@@ -46,8 +46,7 @@ const postUpgradeToAdmin = [
 
       const isValid = validatePassword(adminPassword, adminPasswordHash);
       if (isValid) {
-        console.log(`User ID: ${req.session.passport.user}`);
-        await setUserAdminStatus(req.session.passport.user, true);
+        await setUserAdminStatus(req.user.id, true);
         return res.redirect("/admin/dashboard");
       } else {
         return res.status(401).send("<p>Invalid Password</p>");

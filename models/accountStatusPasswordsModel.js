@@ -14,6 +14,20 @@ async function findHashByRoleName(roleName) {
   }
 }
 
+async function changeRolePassword(roleName, password) {
+  const query = `
+  UPDATE account_status_passwords SET password_hash = $1 WHERE role_name = $2
+  `;
+
+  try {
+    await pool.query(query, [password, roleName]);
+  } catch (err) {
+    console.error(`Error changing password for role ${roleName}: `, err);
+    throw err;
+  }
+}
+
 module.exports = {
   findHashByRoleName,
+  changeRolePassword,
 };

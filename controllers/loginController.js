@@ -49,9 +49,6 @@ const postValidateLogin = [
       validationErrors
         .array()
         .forEach((error) => (errorsMap[error.path] = error.msg));
-      console.log(errors);
-      console.log(validationErrors);
-      console.log(errorsMap);
       return res.status(422).render("login", {
         title: "Login",
         data: req.body,

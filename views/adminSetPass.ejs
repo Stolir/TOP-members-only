@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <form action="/admin/<%= postRoute %>" method="POST">
+      <div>
+        <label for="password">New Password</label>
+        <input type="password" id="password" name="password" />
+        <% if (errors?.password) { %>
+          <span class="error"><%= errors.password %></span>
+        <% } %>
+      </div>
+      <div>
+        <label for="">Admin Password</label>
+        <input type="password" name="adminPassword" id="adminPassword" />
+        <% if (errors?.adminPassword) { %>
+          <span class="error"><%= errors.adminPassword %></span>
+        <% } %>
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>

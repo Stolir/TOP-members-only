@@ -61,7 +61,7 @@ app.use("/login", loginRouter);
 app.use("/signup", signupRouter);
 app.use("/logout", logoutRouter);
 app.use("/upgrade-account", isLoggedIn, upgradeAccountRouter);
-app.use("/admin", isAdmin, adminRouter);
+app.use("/admin", isLoggedIn, isAdmin, adminRouter);
 
 // Run app
 app.listen(PORT, (err) => {
