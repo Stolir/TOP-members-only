@@ -110,13 +110,14 @@ header nav {
   justify-content: space-between;
   padding: 0.5rem 1.5rem 0.5rem 1rem;
   border-radius: 50px; /* fully rounded edges */
-  max-width: 600px;
+  max-width: 400px;
+  width: 100%;
   margin: 20px auto;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* subtle shadow */
 }
 
 header nav .logo {
-  width: 50px;
+  width: 40px;
   background-color: white;
   border-radius: 50%;
   padding: 0.1rem;
@@ -129,6 +130,7 @@ header nav ul {
 
 header nav ul li {
   text-decoration: none;
+  flex-shrink: 0;
 }
 
 header nav a {
@@ -152,10 +154,87 @@ body {
 
 /* ---------- CONTENT ---------- */
 
+/* ---------- ACCOUNT ---------- */
+
+.user-info-container {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-info-container form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: max-content;
+  background-color: rgba(0, 0, 0, 0.103);
+  padding: 2rem;
+  gap: 1rem;
+}
+
+.user-info-container form input {
+  border: none;
+  outline: none;
+  padding: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.507);
+}
+
+.user-info-container__name > div,
+.user-info-container form > div {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.user-info-container form .user-info-container__name {
+  flex-direction: row;
+  gap: 1rem;
+}
+
+/* ---------- ACCOUNT ---------- */
+
 /* ---------- MESSAGES --------- */
 .posts-container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.posts-container__card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(255, 255, 255, 0.459);
+  padding: 2rem;
+  max-width: 400px;
+  width: 100%;
+  gap: 0.2rem;
+  border: var(--color-accent) 4px solid;
+}
+
+.posts-container__card div {
+  display: flex;
+  justify-content: space-between;
+  color: grey;
+  margin-top: 1rem;
+}
+
+.delete-post {
+  position: absolute;
+  right: 30px;
+  top: 30px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.delete-post img {
+  width: 20px;
 }
 
 /* ---------- MESSAGES --------- */

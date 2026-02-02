@@ -1,5 +1,8 @@
 const { body, validationResult, matchedData } = require("express-validator");
-const { createNewMessage } = require("../models/messagesModel");
+const {
+  createNewMessage,
+  deleteMessageById,
+} = require("../models/messagesModel");
 
 const validateData = [
   body("title")
@@ -43,7 +46,14 @@ const postCreateMessage = [
   },
 ];
 
+async function postDeleteMessage(req, res) {
+  const { msgId } = req.params;
+  await deleteMessageById(msgId);
+  res.redirect("/");
+}
+
 module.exports = {
   getCreateMessagePage,
   postCreateMessage,
+  postDeleteMessage,
 };

@@ -34,4 +34,17 @@ async function createNewMessage(message, userId) {
   }
 }
 
-module.exports = { getAllMessages, createNewMessage };
+async function deleteMessageById(msgId) {
+  const query = `
+  DELETE FROM messages WHERE id = $1
+  `;
+
+  try {
+    await pool.query(query, [msgId]);
+  } catch (err) {
+    console.log(`Error deleting message ${msgId}: `, err);
+    throw err;
+  }
+}
+
+module.exports = { getAllMessages, createNewMessage, deleteMessageById };

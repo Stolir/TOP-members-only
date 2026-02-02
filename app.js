@@ -23,7 +23,8 @@ const upgradeAccountRouter = require("./routes/upgradeAccountRouter");
 const adminRouter = require("./routes/adminRouter");
 const { isAdmin, isLoggedIn } = require("./middleware/authMiddleware");
 const messagesRouter = require("./routes/messagesRouter");
-const { userIsLoggedIn } = require("./lib/authHelpers");
+const { userIsLoggedIn, userIsAdmin } = require("./lib/authHelpers");
+const accountRouter = require("./routes/accountRouter");
 
 // Define express related
 const app = express();
@@ -52,7 +53,7 @@ app.use(passport.session());
 
 // use custom middleware
 app.use((req, res, next) => {
-  res.locals.isLoggedIn = userIsLoggedIn(req);
+  res.locals.user = req.user || null;
   next();
 });
 // Debugging -- DEV ONLY --
@@ -70,6 +71,7 @@ app.use("/logout", logoutRouter);
 app.use("/upgrade-account", isLoggedIn, upgradeAccountRouter);
 app.use("/admin", isLoggedIn, isAdmin, adminRouter);
 app.use("/messages", isLoggedIn, messagesRouter);
+app.use("/account", isLoggedIn, accountRouter);
 
 // Run app
 app.listen(PORT, (err) => {

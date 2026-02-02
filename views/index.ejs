@@ -8,19 +8,29 @@
   </head>
   <body>
     <%- include('partials/navbar') %>
-    <h1><%= title %></h1>
     <section class="posts-container">
-    <% if (messages.length > 0) { 
-      messages.forEach(message => { %>
+      <h2>Posts</h2>
+      <% if (messages.length > 0) { %>
+       <% messages.forEach(message => { %>
         <div class="posts-container__card">
-        <p><%= message.title %></p>
-        <p><%= message.body %></p>
-        <p style="color: grey;"><%= message.username ?? 'Anonymous' %></p>
+          <h3><%= message.title %></h3>
+          <p><%= message.body %></p>
+          <div>
+            <p style="color: grey;"><%= message.username ?? 'Anonymous' %></p>
+            <p class="posts-container__card_date"><%= message.formattedDate %></p>
+          </div>
+          <% if (user?.is_admin) { %>
+           <form action="/messages/<%= message.id %>/delete" method="post" onsubmit="confirm('Are you sure you want to delete this message?')">
+            <button class="delete-post" type="submit">
+              <img src="/icons/trash-solid.svg" alt="delete post">
+            </button>
+          </form>
+          <% } %>
         </div>
-    <%  }); 
-      } else { %>
+       <% }) %>
+      <% } else { %>
         <p>No posts. <a href="/messages/new">Create one!</a></p>
-    <% } %>
+      <% } %>
     </section>
   </body>
 </html>
