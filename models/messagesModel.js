@@ -6,6 +6,7 @@ async function getAllMessages(isMember) {
     query = `
     SELECT m.*, u.username AS username FROM messages m
     JOIN users u ON m.user_id = u.id
+    ORDER BY created_at DESC
     `;
   } else {
     query = `SELECT id, title, body, created_at FROM messages`;
