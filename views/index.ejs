@@ -8,5 +8,18 @@
   <body>
     <%- include('partials/navbar') %>
     <h1><%= title %></h1>
+    <section>
+    <% if (messages.length > 0) { 
+      messages.forEach(message => { %>
+        <div>
+        <p><%= message.title %></p>
+        <p><%= message.body %></p>
+        <p style="color: grey;"><%= message.username ?? 'Anonymous' %></p>
+        </div>
+    <%  }); 
+      } else { %>
+        <p>No posts. <a href="/messages/new">Create one!</a></p>
+    <% } %>
+    </section>
   </body>
 </html>

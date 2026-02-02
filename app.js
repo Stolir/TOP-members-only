@@ -22,6 +22,7 @@ const logoutRouter = require("./routes/logoutRouter");
 const upgradeAccountRouter = require("./routes/upgradeAccountRouter");
 const adminRouter = require("./routes/adminRouter");
 const { isAdmin, isLoggedIn } = require("./middleware/authMiddleware");
+const messagesRouter = require("./routes/messagesRouter");
 
 // Define express related
 const app = express();
@@ -62,6 +63,7 @@ app.use("/signup", signupRouter);
 app.use("/logout", logoutRouter);
 app.use("/upgrade-account", isLoggedIn, upgradeAccountRouter);
 app.use("/admin", isLoggedIn, isAdmin, adminRouter);
+app.use("/messages", isLoggedIn, messagesRouter);
 
 // Run app
 app.listen(PORT, (err) => {
