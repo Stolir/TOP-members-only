@@ -56,9 +56,23 @@ async function setUserAdminStatus(userId, value) {
   }
 }
 
+async function setUserMemberStatus(userId, value) {
+  const query = `
+  UPDATE users SET is_club_member = $2 WHERE id = $1
+  `;
+
+  try {
+    await pool.query(query, [userId, value]);
+  } catch (err) {
+    console.error(`Error setting user number ${userId} to club member: `, err);
+    throw err;
+  }
+}
+
 module.exports = {
   findUserByUsername,
   findUserById,
   createUser,
   setUserAdminStatus,
+  setUserMemberStatus,
 };

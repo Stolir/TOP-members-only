@@ -8,17 +8,17 @@
   </head>
   <body>
     <h1><%= title %></h1>
-    <form action="/upgrade-account/admin" method="post">
+    <form action="/upgrade-account/<%= postRoute %>" method="post">
       <div>
-        <label for="adminPassword">Admin Password</label>
+        <label for="adminPassword">Password</label>
         <input
           type="password"
-          name="adminPassword"
-          id="adminPassword"
+          name="password"
+          id="password"
           required
         />
-        <% if (errors?.adminPassword) { %>
-          <span class="error"><%= errors.adminPassword %></span>
+        <% if (errors?.password) { %>
+          <span class="error"><%= errors.password %></span>
         <% } %>
       </div>
       <button type="submit">Submit</button>
