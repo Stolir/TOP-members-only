@@ -8,7 +8,7 @@ const { isLoggedIn } = require("../middleware/authMiddleware");
 
 const upgradeAccountRouter = Router();
 
-upgradeAccountRouter.get("/", isLoggedIn, getUpgradeAccountPage);
+upgradeAccountRouter.get("/", getUpgradeAccountPage);
 upgradeAccountRouter.get("/admin", getUpgradeToAdminPage);
 upgradeAccountRouter.post("/admin", postUpgradeToAdmin);
 

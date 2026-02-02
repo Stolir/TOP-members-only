@@ -21,6 +21,7 @@ const signupRouter = require("./routes/signupRouter");
 const logoutRouter = require("./routes/logoutRouter");
 const upgradeAccountRouter = require("./routes/upgradeAccountRouter");
 const adminRouter = require("./routes/adminRouter");
+const { isAdmin, isLoggedIn } = require("./middleware/authMiddleware");
 
 // Define express related
 const app = express();
@@ -50,7 +51,7 @@ app.use(passport.session());
 // Debugging -- DEV ONLY --
 app.use((req, res, next) => {
   console.log(req.session);
-  // console.log(req.user);
+  console.log(req.user);
   next();
 });
 
@@ -59,8 +60,8 @@ app.use("/", indexRouter);
 app.use("/login", loginRouter);
 app.use("/signup", signupRouter);
 app.use("/logout", logoutRouter);
-app.use("/upgrade-account", upgradeAccountRouter);
-app.use("/admin", adminRouter);
+app.use("/upgrade-account", isLoggedIn, upgradeAccountRouter);
+app.use("/admin", isAdmin, adminRouter);
 
 // Run app
 app.listen(PORT, (err) => {
