@@ -34,9 +34,9 @@ async function run() {
       id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
       role_name TEXT NOT NULL UNIQUE,
       password_hash TEXT NOT NULL,
-      created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+      created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
       created_by INTEGER REFERENCES users(id) ON DELETE SET NULL
-      )
+      );
       `,
     );
 
@@ -44,7 +44,7 @@ async function run() {
     console.log("---- Seeding Complete ----");
   } catch (err) {
     await client.query("ROLLBACK");
-    console.error("---- Seeding failed ----");
+    console.error("---- Seeding failed ----", err);
   } finally {
     await client.end();
   }
