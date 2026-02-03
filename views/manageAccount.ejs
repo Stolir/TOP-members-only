@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/global.css" />
+    <title><%= title %></title>
+  </head>
+  <body>
+    <%- include('partials/navbar') %>
+    <section class="user-info-container">
+      <form>
+        <div class="user-info-container__name">
+          <div>
+            <label for="first_name">First name</label>
+            <input
+              type="text"
+              name="first_name"
+              id="first_name"
+              disabled
+              value="<%= user.first_name %>"
+            />
+          </div>
+          <div>
+            <label for="last_name">Last name</label>
+            <input
+              type="text"
+              name="last_name"
+              id="last_name"
+              disabled
+              value="<%= user.last_name %>"
+            />
+          </div>
+        </div>
+        <div>
+          <label for="username">Username</label>
+          <input
+            type="text"
+            name="username"
+            id="username"
+            disabled
+            value="<%= user.username %>"
+          />
+        </div>
+        <div>
+          <% if (user.is_club_member) { %>
+           <p>You are a club member.</p>
+          <% } else { %>
+            <a href="/upgrade-account/club-member">Become a club member</a>
+          <% } %>
+        </div>
+        <div>
+          <% if (user.is_admin) { %>
+           <p>You are an admin. <a href="/admin/dashboard">Go to dashboard</a></p>
+          <% } else { %>
+            <a href="/upgrade-account/admin">Activate admin</a>
+          <% } %>
+        </div>
+      </form>
+    </section>
+  </body>
+</html>

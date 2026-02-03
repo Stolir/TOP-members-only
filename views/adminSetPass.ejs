@@ -8,23 +8,25 @@
   </head>
   <body>
     <%- include('partials/navbar') %>
-    <h1><%= title %></h1>
-    <form action="/admin/<%= postRoute %>" method="POST">
-      <div>
-        <label for="password">New Password</label>
-        <input type="password" id="password" name="password" />
-        <% if (errors?.password) { %>
-          <span class="error"><%= errors.password %></span>
-        <% } %>
-      </div>
-      <div>
-        <label for="">Admin Password</label>
-        <input type="password" name="adminPassword" id="adminPassword" />
-        <% if (errors?.adminPassword) { %>
-          <span class="error"><%= errors.adminPassword %></span>
-        <% } %>
-      </div>
-      <button type="submit">Submit</button>
-    </form>
+    <section class="form-container">
+      <h1><%= title %></h1>
+      <form action="/admin/<%= postRoute %>" method="POST">
+        <div>
+          <label for="password">New Password</label>
+          <input type="password" id="password" name="password" />
+          <% if (errors?.password) { %>
+            <span class="error"><%= errors.password %></span>
+          <% } %>
+        </div>
+        <div>
+          <label for="">Admin Password</label>
+          <input type="password" name="adminPassword" id="adminPassword" />
+          <% if (errors?.adminPassword) { %>
+            <span class="error"><%= errors.adminPassword %></span>
+          <% } %>
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+    </section>
   </body>
 </html>

@@ -11,16 +11,14 @@ const validateData = [
     .withMessage("Title is required")
     .bail()
     .isLength({ max: 168 })
-    .withMessage("Title must not be longer than 168 characters")
-    .escape(),
+    .withMessage("Title must not be longer than 168 characters"),
   body("body")
     .trim()
     .notEmpty()
     .withMessage("Body is required")
     .bail()
     .isLength({ max: 750 })
-    .withMessage("Body must not be longer than 750 characters")
-    .escape(),
+    .withMessage("Body must not be longer than 750 characters"),
 ];
 
 function getCreateMessagePage(req, res) {

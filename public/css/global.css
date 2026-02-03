@@ -92,8 +92,13 @@ h6 {
 /* ----------- NAVBAR ---------- */
 
 header {
+  position: sticky;
+  /* left: 50%; */
+  /* transform: translate(-50%); */
+  top: 0;
   display: flex;
   justify-content: center;
+  z-index: 10000;
 }
 
 header nav,
@@ -237,9 +242,34 @@ body {
   width: 20px;
 }
 
+.create-new-post {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 40%;
+  max-width: 400px;
+  align-items: stretch;
+}
+
+.create-new-post div {
+  display: flex;
+  flex-direction: column;
+}
+
+.create-new-post > div input,
+.create-new-post > div textarea {
+  width: 100%;
+}
+
+.create-new-post textarea {
+  max-height: 300px;
+  max-width: inherit;
+  height: 100%;
+}
+
 /* ---------- MESSAGES --------- */
 
-/* ----------- LOGIN ----------- */
+/* ----------- FORMS ----------- */
 
 .form-container {
   width: 100%;
@@ -251,22 +281,19 @@ body {
   gap: 1rem;
 }
 
-.login,
-.signup {
+form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 1rem;
 }
 
-.login div,
-.signup div {
+form div {
   display: flex;
   flex-direction: column;
 }
 
-.login button,
-.signup button {
+form button {
   background-color: var(--color-accent);
   padding: 0.3rem 1rem;
   color: white;
@@ -274,20 +301,19 @@ body {
   border: none;
 }
 
-.login > div input,
-.signup > div input {
+form > div input,
+form textarea {
   border: none;
   outline: none;
   padding: 0.3rem;
 }
 
-.login > div input:focus,
-.signup > div input:focus {
+form > div input:focus,
+form > div textarea:focus {
   outline: var(--color-accent) 2px solid;
 }
 
-.login button:hover,
-.signup button:hover {
+form button:hover {
   opacity: 0.8;
 }
 
@@ -300,13 +326,20 @@ body {
   gap: 0.5rem;
 }
 
-/* .passwordsContainer > div,
-.namesContainer > div {
-  flex-direction: column;
-} */
-/* ----------- LOGIN ----------- */
+/* ----------- FORMS ----------- */
 
-/* ---------- Errors ----------- */
+/* ----------- ADMIN ----------- */
+
+.admin-controls {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ----------- ADMIN ----------- */
+
+/* ---------- ERRORS ----------- */
 .error {
   color: red;
   font-size: 0.8rem;
@@ -316,4 +349,17 @@ body {
   color: red;
 }
 
-/* ---------- Errors ----------- */
+/* ---------- ERRORS ----------- */
+
+/* ---------- STATUS ----------- */
+
+.status-container {
+  display: flex;
+  width: 100%;
+  height: 70%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* ---------- STATUS ----------- */

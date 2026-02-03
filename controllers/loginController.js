@@ -19,9 +19,11 @@ const validateUserLogin = [
 
 function getLoginPage(req, res) {
   if (userIsLoggedIn(req)) {
-    return res.send(
-      '<h1>You are already logged in</h1> <a href="/">Return to home</a> ',
-    );
+    return res.render("status", {
+      title: "An error occurred!",
+      status: { code: 409, msg: "You are already logged in" },
+      redirect: { path: "/", msg: "Go to home page" },
+    });
   }
 
   const data = {};

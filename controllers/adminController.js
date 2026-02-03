@@ -53,9 +53,14 @@ const postAdminSetClubPass = [
       if (isValid) {
         const newHash = generateHashedPassword(data.password);
         await changeRolePassword("club_member", newHash);
-        res.send(
-          '<h1>Changed club password successfully</h1> <a href="/admin/dashboard">Return to dashboard</a>',
-        );
+        res.render("status", {
+          title: "Success",
+          status: { code: 200, msg: "Set new club password successfully" },
+          redirect: {
+            path: "/admin/dashboard",
+            msg: "Go to back to dashboard",
+          },
+        });
       } else {
         errorsMap.adminPassword = "Invalid admin password";
         return res.render("adminSetPass", {
@@ -101,9 +106,14 @@ const postAdminSetAdminPass = [
       if (isValid) {
         const newHash = generateHashedPassword(data.password);
         await changeRolePassword("admin", newHash);
-        res.send(
-          '<h1>Changed admin password successfully</h1> <a href="/admin/dashboard">Return to dashboard</a>',
-        );
+        res.render("status", {
+          title: "Success",
+          status: { code: 200, msg: "Set new admin password successfully" },
+          redirect: {
+            path: "/admin/dashboard",
+            msg: "Go to back to dashboard",
+          },
+        });
       } else {
         errorsMap.adminPassword = "Invalid admin password";
         return res.render("adminSetPass", {

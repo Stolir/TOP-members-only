@@ -18,9 +18,11 @@ function getUpgradeAccountPage(req, res) {
 
 function getUpgradeToAdminPage(req, res, next) {
   if (userIsAdmin(req)) {
-    return res.send(
-      '<h1>You are already an admin</h1> <p><a href="/admin/dashboard">Go to dashboard</a></p>',
-    );
+    return res.render("status", {
+      title: "An error occurred!",
+      status: { code: 409, msg: "You are already an admin" },
+      redirect: { path: "/admin/dashboard", msg: "Go to admin dashboard" },
+    });
   }
   res.render("upgradeAccountForm", {
     title: "Upgrade Account to Admin",
@@ -55,7 +57,11 @@ const postUpgradeToAdmin = [
         await setUserAdminStatus(req.user.id, true);
         return res.redirect("/admin/dashboard");
       } else {
-        return res.status(401).send("<p>Invalid Password</p>");
+        return res.status(422).render("upgradeAccountForm", {
+          title: "Upgrade Account to Admin",
+          postRoute: "admin",
+          errors: { password: "Wrong password" },
+        });
       }
     } catch (err) {
       next(err);
@@ -65,9 +71,11 @@ const postUpgradeToAdmin = [
 
 function getUpgradeToMemberPage(req, res, next) {
   if (userIsClubMember(req)) {
-    return res.send(
-      '<h1>You are already a club member</h1> <p><a href="/">Go to home page</a></p>',
-    );
+    return res.render("status", {
+      title: "An error occurred!",
+      status: { code: 409, msg: "You are already a club member" },
+      redirect: { path: "/", msg: "Go to home page" },
+    });
   }
   res.render("upgradeAccountForm", {
     title: "Upgrade Account to Member",
@@ -102,7 +110,11 @@ const postUpgradeToMember = [
         await setUserMemberStatus(req.user.id, true);
         return res.redirect("/");
       } else {
-        return res.status(401).send("<p>Invalid Password</p>");
+        return res.status(422).render("upgradeAccountForm", {
+          title: "Upgrade Account to Member",
+          postRoute: "club-member",
+          errors: { password: "Wrong password" },
+        });
       }
     } catch (err) {
       next(err);
