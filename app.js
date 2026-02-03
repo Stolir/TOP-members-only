@@ -56,12 +56,6 @@ app.use((req, res, next) => {
   res.locals.user = req.user || null;
   next();
 });
-// Debugging -- DEV ONLY --
-app.use((req, res, next) => {
-  console.log(req.session);
-  console.log(req.user);
-  next();
-});
 
 // use routes
 app.use("/", indexRouter);
